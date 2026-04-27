@@ -1,74 +1,68 @@
-{{- /* layouts/partials/card-media-right.html */ -}}
-{{- $p := .p -}}
-{{- $clamp := or .clamp 300 -}}              {{/* chars to truncate to when clamping */}}
-{{- $showFull := .showFull | default false -}}
-{{- $extUrl := $p.Params.externalUrl -}}
+{{- $p       := .p -}}
+{{- $extUrl  := $p.Params.externalUrl -}}
 {{- $cardUrl := cond (ne ($extUrl | default "") "") $extUrl $p.RelPermalink -}}
 {{- $extAttrs := cond (ne ($extUrl | default "") "") `target="_blank" rel="noopener"` "" -}}
 
 <article class="card card-media-right">
+
   <div class="meta">
-    <a href="{{ $cardUrl }}" {{ $extAttrs | safeHTMLAttr }}><h4 class="title">{{ $p.Title }}</h4></a>
+    <a href="{{ $cardUrl }}" {{ $extAttrs | safeHTMLAttr }}>
+      <h4 class="title">{{ $p.Title }}</h4>
+    </a>
 
     {{- with $p.Params.authors }}
       {{- $authors := where . "ne" "" }}
       {{- if $authors }}<p class="muted authors">{{ delimit $authors ", " }}</p>{{ end }}
     {{- end }}
 
-    {{- $venue := $p.Params.venue }}
-    {{- $date := $p.Date }}
-    {{- if or $venue $date }}
-      <p class="muted venue">
-        {{- with $venue }}<em>{{ . }}</em>{{ end }}
-        {{- if $date }}{{ if $venue }} {{ end }}{{ $date.Format "2006" }}{{ end }}
-      </p>
+    {{- if or $p.Params.venue $p.Date }}
+    <p class="muted venue">
+      {{- with $p.Params.venue }}<em>{{ . }}</em>{{ end }}
+      {{- if $p.Date }}{{ if $p.Params.venue }} {{ end }}{{ $p.Date.Format "2006" }}{{ end }}
+    </p>
     {{- end }}
 
-    {{/* Links: accept map or array */}}
-    {{- $ln := $p.Params.links -}}
-    {{- $pairs := slice -}}
-    {{- if $ln -}}
-      {{- if eq (printf "%T" $ln) "map[string]interface {}" -}}
+    {{- $ln := $p.Params.links }}
+    {{- $pairs := slice }}
+    {{- if $ln }}
+      {{- if eq (printf "%T" $ln) "map[string]interface {}" }}
         {{- range $k, $v := $ln }}{{ if $v }}{{ $pairs = $pairs | append (dict "name" $k "url" $v) }}{{ end }}{{ end }}
-      {{- else -}}
+      {{- else }}
         {{- range $ln }}{{ if and .name .url }}{{ $pairs = $pairs | append (dict "name" .name "url" .url) }}{{ end }}{{ end }}
+      {{- end }}
+    {{- end }}
+    {{- if $pairs }}
+    <p class="pub-links">
+      {{- range $i, $x := $pairs -}}
+        <a href="{{ $x.url }}">{{ lower $x.name }}</a>{{ if lt (add $i 1) (len $pairs) }} / {{ end }}
       {{- end -}}
-    {{- end -}}
-    {{- if gt (len $pairs) 0 }}
-      <p class="pub-links">
-        {{- range $i, $x := $pairs -}}
-          <a href="{{ $x.url }}">{{ lower $x.name }}</a>{{ if lt (add $i 1) (len $pairs) }} / {{ end }}
-        {{- end -}}
-      </p>
+    </p>
     {{- end }}
 
-    {{/* Snippet: preview by default; expand shows full text, JS button collapses back */}}
-    {{- $fullText := "" -}}
-    {{- with $p.Params.abstract }}{{ $fullText = . }}{{ else }}{{ with $p.Params.description }}{{ $fullText = . }}{{ else }}{{ $fullText = $p.Plain }}{{ end }}{{ end -}}
-    {{- $preview := $fullText | plainify | truncate 220 "…" -}}
-    {{- if $fullText }}
+    {{- $text := "" }}
+    {{- with $p.Params.abstract }}{{ $text = . }}{{ else }}{{ with $p.Params.description }}{{ $text = . }}{{ else }}{{ $text = $p.Plain }}{{ end }}{{ end }}
+    {{- if $text }}
     <details class="abstract-expand">
-      <summary class="snippet snippet-clamped">{{ $preview }}</summary>
+      <summary class="snippet snippet-clamped">{{ $text | plainify | truncate 220 "…" }}</summary>
       <div class="abstract-body">
-        <p class="snippet snippet-full">{{ $fullText | safeHTML }}</p>
+        <p class="snippet snippet-full">{{ $text | safeHTML }}</p>
         <button class="abstract-collapse" onclick="this.closest('details').open=false">↑ less</button>
       </div>
     </details>
     {{- end }}
   </div>
 
-  {{/* Media on the right: video or image or placeholder */}}
+  {{- $thumb := $p.Params.thumbnail | default (index ($p.Params.images) 0) }}
   <a class="media" href="{{ $cardUrl }}" aria-label="{{ $p.Title }}" {{ $extAttrs | safeHTMLAttr }}>
-    {{- $thumb := "" -}}
-    {{- with $p.Params.thumbnail }}{{ $thumb = . }}{{ end }}
-    {{- if and (not $thumb) $p.Params.images }}{{ $thumb = index $p.Params.images 0 }}{{ end }}
-
-    {{- if and $thumb (strings.HasSuffix (lower $thumb) ".mp4") -}}
-      <video class="thumb" src="{{ $thumb | strings.TrimLeft "/" | absURL }}" muted autoplay loop playsinline></video>
-    {{- else if $thumb -}}
-      <img class="thumb" src="{{ $thumb | strings.TrimLeft "/" | absURL }}" alt="">
-    {{- else -}}
+    {{- if $thumb }}
+      {{- if strings.HasSuffix ($thumb | lower) ".mp4" }}
+        <video class="thumb" src="{{ $thumb | strings.TrimLeft "/" | absURL }}" muted autoplay loop playsinline></video>
+      {{- else }}
+        <img class="thumb" src="{{ $thumb | strings.TrimLeft "/" | absURL }}" alt="">
+      {{- end }}
+    {{- else }}
       <div class="thumb thumb--placeholder"></div>
-    {{- end -}}
+    {{- end }}
   </a>
+
 </article>

@@ -2,7 +2,7 @@
 title: "{{ replace .Name "-" " " | title }}"
 authors: ["Samuele Ruffino"]
 date: {{ .Date }}
-thumbnail: "/images/projects/placeholder.jpg"   # .jpg / .mp4 / .gif
+thumbnail: "/images/posts/placeholder.jpg"   # .jpg / .mp4 / .gif
 description: >
   Short description of the post.
 summary: ""
