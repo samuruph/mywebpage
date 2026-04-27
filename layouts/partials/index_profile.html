@@ -1,0 +1,130 @@
+<div class="profile">
+  {{- with site.Params.profileMode }}
+
+  <!-- ===================== HERO (text left, image right) ===================== -->
+  <section class="hero">
+    <div class="hero-inner">
+
+      <!-- LEFT: name, subtitle, about, buttons -->
+      <div class="hero-text">
+        <h1 class="hero-name">{{ .title | default site.Title | markdownify }}</h1>
+        <span class="hero-topics">{{ .subtitle | markdownify }}</span>
+
+        <div class="profile-text">
+          {{ with site.Params.home.intro }}{{ . | markdownify }}{{ end }}
+        </div>
+
+        {{- with .buttons }}
+        <div class="buttons hero-buttons">
+          {{- range . }}
+            <a class="button" href="{{ trim .url " " }}" rel="noopener" title="{{ .name }}">
+              <span class="button-inner">{{ .name }}</span>
+            </a>
+          {{- end }}
+        </div>
+        {{- end }}
+      </div>
+
+      <!-- RIGHT: avatar -->
+      {{- if .imageUrl -}}
+      <div class="hero-image">
+        {{- $img := "" }}
+        {{- if not (urls.Parse .imageUrl).IsAbs }}{{- $img = resources.Get .imageUrl }}{{- end }}
+        {{- if $img }}
+          {{- $processableFormats := (slice "jpg" "jpeg" "png" "tif" "bmp" "gif") -}}
+          {{- if hugo.IsExtended }}{{- $processableFormats = $processableFormats | append "webp" -}}{{- end -}}
+          {{- $prod := (hugo.IsProduction | or (eq site.Params.env "production")) }}
+          {{- if and (in $processableFormats $img.MediaType.SubType) (eq $prod true) }}
+            {{- if (not (and (not .imageHeight) (not .imageWidth))) -}}
+              {{- $img = $img.Resize (printf "%dx%d" .imageWidth .imageHeight) -}}
+            {{- else if .imageHeight -}}
+              {{- $img = $img.Resize (printf "x%d" .imageHeight) -}}
+            {{- else if .imageWidth -}}
+              {{- $img = $img.Resize (printf "%dx" .imageWidth) -}}
+            {{- else -}}
+              {{- $img = $img.Resize "300x300" -}}
+            {{- end -}}
+          {{- end -}}
+          <img class="hero-avatar" draggable="false"
+               src="{{ $img.Permalink }}"
+               alt="{{ .imageTitle | default "profile image" }}"
+               title="{{ .imageTitle }}"
+               height="{{ .imageHeight | default 300 }}"
+               width="{{ .imageWidth | default 300 }}" />
+        {{- else -}}
+          <img class="hero-avatar" draggable="false"
+               src="{{ .imageUrl | absURL }}"
+               alt="{{ .imageTitle | default "profile image" }}"
+               title="{{ .imageTitle }}"
+               height="{{ .imageHeight | default 300 }}"
+               width="{{ .imageWidth | default 300 }}" />
+        {{- end -}}
+        <div class="hero-socials">
+          {{- partial "social_icons.html" -}}
+        </div>
+      </div>
+      {{- end }}
+
+    </div>
+  </section>
+  {{- end }}
+
+  <!-- ===================== SECTIONS ===================== -->
+  <section class="home-sections">
+
+    <!-- ===== Publications ===== -->
+    <div class="section">
+      <div class="section-head">
+        <h3>Recent Publications</h3>
+        <a class="view-all" href="/publications/">View all →</a>
+      </div>
+      <div class="cards cards-wide">
+        {{ $pubs := (where site.RegularPages "Section" "publications").ByDate.Reverse }}
+        {{ if gt (len $pubs) 0 }}
+          {{ range $pubs }}
+            {{ partial "card-media-right.html" (dict "p" . "clamp" 500) }}
+          {{ end }}
+        {{ else }}
+          <p class="muted">Add items under <code>content/publications/</code>.</p>
+        {{ end }}
+      </div>
+    </div>
+
+    <!-- ===== Projects ===== -->
+    <div class="section">
+      <div class="section-head">
+        <h3>Projects</h3>
+        <a class="view-all" href="/projects/">View all →</a>
+      </div>
+      <div class="cards cards-wide">
+        {{ $projects := (where site.RegularPages "Section" "projects").ByDate.Reverse }}
+        {{ if gt (len $projects) 0 }}
+          {{ range $projects }}
+            {{ partial "card-media-right.html" (dict "p" . "clamp" 500) }}
+          {{ end }}
+        {{ else }}
+          <p class="muted">Add items under <code>content/projects/</code>.</p>
+        {{ end }}
+      </div>
+    </div>
+
+    <!-- ===== Blog ===== -->
+    <div class="section">
+      <div class="section-head">
+        <h3>Latest Blog Posts</h3>
+        <a class="view-all" href="/posts/">View all →</a>
+      </div>
+      <div class="cards cards-wide">
+        {{ $posts := (where (where site.RegularPages "Section" "posts") "Draft" "!=" true).ByDate.Reverse }}
+        {{ if gt (len $posts) 0 }}
+          {{ range $posts }}
+            {{ partial "card-media-right.html" (dict "p" . "clamp" 500) }}
+          {{ end }}
+        {{ else }}
+          <p class="muted">Add posts under <code>content/posts/</code>.</p>
+        {{ end }}
+      </div>
+    </div>
+
+  </section>
+</div>

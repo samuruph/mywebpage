@@ -1,0 +1,125 @@
+baseURL: https://samuruph.com/
+languageCode: en-us
+title: Samuele Ruffino
+copyright: "© [PaperMod Contributors](https://github.com/adityatelange/hugo-PaperMod/graphs/contributors)"
+theme: ["PaperMod"]
+
+# Show posts in lists by default
+mainsections: ["publications", "projects", "posts"]
+
+# --- MENUS -------------------------------------------------
+menu:
+  main:
+    - name: Home
+      url: /
+      weight: 1
+
+    - name: Publications
+      url: /publications/
+      weight: 2
+
+    - name: Projects
+      url: /projects/
+      weight: 3
+
+    - identifier: Blog
+      name: Blog
+      url: /posts/
+      weight: 4
+
+    - identifier: more
+      name: More
+      weight: 5
+
+    - name: Archive
+      url: /archives/
+      parent: more
+      weight: 1
+
+    - name: Tags
+      url: /tags/
+      parent: more
+      weight: 2
+
+    - identifier: Search
+      name: Search
+      url: /search/
+      parent: more
+      weight: 3
+
+    - name: Ask Me
+      url: /ask_me/
+      parent: more
+      weight: 4
+
+# --- OUTPUTS (keeps site search working) -------------------
+outputs:
+  home: [HTML, RSS, JSON]
+
+# --- SITE PARAMS -------------------------------------------
+params:
+  env: production
+  author: Samuele Ruffino
+  description: "Generative perception, 3D vision, and autonomous driving."
+
+  defaultTheme: auto
+  ShowShareButtons: true
+  ShowReadingTime: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowAllPagesInArchive: true
+  ShowPageNums: true
+  ShowToc: true
+  TocOpen: true
+
+  # ---------- HERO / PROFILE ON HOMEPAGE ----------
+  profileMode:
+    enabled: true
+    title: "Samuele Ruffino"
+    subtitle: "Generative Models • 3D Vision • Autonomous Driving"
+    imageUrl: "images/avatar.jpeg"     # put your headshot at /static/images/avatar.jpg
+    imageTitle: "Samuele Ruffino"
+    imageWidth: 330
+    imageHeight: 330
+
+  home:
+    introTitle: "About Me"   # this is the heading above the hero
+    intro: >-
+      TODO: Imporve it and update it!
+      
+      
+      I’m a research engineer working on **generative models** for **autonomous driving**,
+      blending **3D/BEV vision**, **video diffusion**, and **multimodal world models**.
+      Currently Co-Op Engineer (AI Foundation) at [**Torc Robotics**](https://torc.ai),
+      building layout-conditioned video diffusion and evaluation pipelines.
+      MSc in **Electrical Engineering & IT** from [**ETH Zürich**](https://ethz.ch);
+      BSc in **Electronics & Communications** from [**Politecnico di Torino**](https://polito.it).
+
+  # ---------- SOCIAL ICONS ----------
+  socialIcons:
+    - name: github
+      url: "https://github.com/samuruph"
+    - name: linkedin
+      url: "https://www.linkedin.com/in/samuele-ruffino/"
+    - name: x
+      url: "https://x.com/samuruph"
+    - name: googlescholar
+      url: "https://scholar.google.com/citations?user=oQG9kh8AAAAJ&hl=it"
+    - name: email
+      url: "mailto:samuele.ruffino@gmail.com"
+
+  # ---------- LIMIT POSTS ON HOME ----------
+  # (we’ll also enforce in the custom home template)
+  homePostCount: 5
+
+
+assets:
+  disableHLJS: true
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false
