@@ -1,8 +1,8 @@
 ---
 title: "Zero-shot Classification using Hyperdimensional Computing"
 authors: ["Samuele Ruffino"]
-venue: "DATE 2024 - Design, Automation and Test in Europe Conference"
-date: 2025-10-03T15:38:24+02:00
+venue: "[DATE - Design, Automation and Test in Europe Conference]"
+date: 2024-10-03T15:38:24+02:00
 thumbnail: "/images/publications/ZS_HDC_DATE24.jpg"   # .jpg / .mp4 / .gif
 abstract: >
   Classification based on Zero-shot Learning (ZSL) is the ability of a model to classify inputs into novel classes on which the model has not previously seen any training examples. Providing an auxiliary descriptor in the form of a set of attributes describing the new classes involved in the ZSL-based classification is one of the favored approaches to solving this challenging task. In this work, inspired by Hyperdimensional Computing (HDC), we propose the use of stationary binary codebooks of symbol-like distributed representations inside an attribute encoder to com- pactly represent a computationally simple end-to-end trainable model, which we name Hyperdimensional Computing Zero-shot Classifier (HDC-ZSC). It consists of a trainable image encoder, an attribute encoder based on HDC, and a similarity kernel. We show that HDC-ZSC can be used to first perform zero-shot attribute extraction tasks and, can later be repurposed for Zero-shot Clas- sification tasks with minimal architectural changes and minimal model retraining. HDC-ZSC achieves Pareto optimal results with a 63.8% top-1 classification accuracy on the CUB-200 dataset by having only 26.6 million trainable parameters. Compared to two other state-of-the-art non-generative approaches, HDC-ZSC achieves 4.3% and 9.9% better accuracy, while they require more than 1.85× and 1.72× parameters compared to HDC-ZSC, respectively.
