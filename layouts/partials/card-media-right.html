@@ -64,9 +64,9 @@
     {{- if and (not $thumb) $p.Params.images }}{{ $thumb = index $p.Params.images 0 }}{{ end }}
 
     {{- if and $thumb (strings.HasSuffix (lower $thumb) ".mp4") -}}
-      <video class="thumb" src="{{ $thumb | relURL }}" muted autoplay loop playsinline></video>
+      <video class="thumb" src="{{ $thumb | strings.TrimLeft "/" | absURL }}" muted autoplay loop playsinline></video>
     {{- else if $thumb -}}
-      <img class="thumb" src="{{ $thumb | relURL }}" alt="">
+      <img class="thumb" src="{{ $thumb | strings.TrimLeft "/" | absURL }}" alt="">
     {{- else -}}
       <div class="thumb thumb--placeholder"></div>
     {{- end -}}

@@ -76,7 +76,7 @@
     <div class="section">
       <div class="section-head">
         <h3>Recent Publications</h3>
-        <a class="view-all" href="{{ "/publications/" | relURL }}">View all →</a>
+        <a class="view-all" href="{{ "publications/" | absURL }}">View all →</a>
       </div>
       <div class="cards cards-wide">
         {{ $pubs := (where site.RegularPages "Section" "publications").ByDate.Reverse }}
@@ -94,7 +94,7 @@
     <div class="section">
       <div class="section-head">
         <h3>Projects</h3>
-        <a class="view-all" href="{{ "/projects/" | relURL }}">View all →</a>
+        <a class="view-all" href="{{ "projects/" | absURL }}">View all →</a>
       </div>
       <div class="cards cards-wide">
         {{ $projects := (where site.RegularPages "Section" "projects").ByDate.Reverse }}
@@ -112,7 +112,7 @@
     <div class="section">
       <div class="section-head">
         <h3>Latest Blog Posts</h3>
-        <a class="view-all" href="{{ "/posts/" | relURL }}">View all →</a>
+        <a class="view-all" href="{{ "posts/" | absURL }}">View all →</a>
       </div>
       <div class="cards cards-wide">
         {{ $posts := (where (where site.RegularPages "Section" "posts") "Draft" "!=" true).ByDate.Reverse }}
