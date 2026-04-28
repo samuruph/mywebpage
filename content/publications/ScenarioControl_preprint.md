@@ -1,6 +1,6 @@
 ---
 title: "ScenarioControl: Vision-Language Controllable Vectorized Latent Scenario Generation"
-authors: ["Samuele Ruffino"]
+authors: ["Lili Gao*", "Yanbo Xu*", "William Koch*", "Samuele Ruffino", "Luke Rowe", "Behdad Chalaki", "Dmitriy Rivkin", "Julian Ost", "Roger Girgis", "Mario Bijelic", "Felix Heide"]
 venue: "preprint"
 date: 2026-04-26T15:38:24+02:00
 thumbnail: "/images/publications/ScenarioControl_preprint_26.gif"   # .jpg / .mp4 / .gif

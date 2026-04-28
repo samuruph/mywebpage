@@ -11,8 +11,16 @@
     </a>
 
     {{- with $p.Params.authors }}
-      {{- $authors := where . "ne" "" }}
-      {{- if $authors }}<p class="muted authors">{{ delimit $authors ", " }}</p>{{ end }}
+      <p class="muted authors">
+        {{- range $i, $a := . -}}
+          {{- if $i }}, {{ end -}}
+          {{- $coFirst := hasSuffix $a "*" -}}
+          {{- $name := cond $coFirst (strings.TrimSuffix "*" $a) $a -}}
+          {{- $isMe := eq $name "Samuele Ruffino" -}}
+          {{- if $isMe }}<strong>{{ $name }}</strong>{{ else }}{{ $name }}{{ end -}}
+          {{- if $coFirst }}<sup>*</sup>{{ end -}}
+        {{- end -}}
+      </p>
     {{- end }}
 
     {{- if or $p.Params.venue $p.Date }}

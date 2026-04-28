@@ -81,12 +81,20 @@ params:
 
   home:
     intro: >-
-      I'm a research engineer working on **generative models** for **autonomous driving**,
-      blending **3D/BEV vision**, **video diffusion**, and **multimodal world models**.
-      Currently Co-Op Engineer (AI Foundation) at [**Torc Robotics**](https://torc.ai),
-      building layout-conditioned video diffusion and evaluation pipelines.
-      MSc in **Electrical Engineering & IT** from [**ETH Zürich**](https://ethz.ch);
-      BSc in **Electronics & Communications** from [**Politecnico di Torino**](https://polito.it).
+      **WIP**:
+      I'm a researcher working on **generative models**, **computer vision**, and **autonomous driving**, blending 3D/BEV perception, video generation, and multimodal world models.
+      
+      
+      Previously a Research Engineer (AI Foundation) at [Torc Robotics](https://torc.ai), supervised by [Prof. Felix Heide](https://scholar.google.com/citations?user=gRqzSHsAAAAJ&hl=en) and [Dr. Mario Bijelic](https://scholar.google.com/citations?user=aJV5jRYAAAAJ&hl),
+      building layout-conditioned video diffusion models and evaluation pipelines.
+      
+      
+      [M.Sc. in Electrical Engineering and Information Technology](https://ethz.ch/en/studies/master/degree-programmes/engineering-sciences/electrical-engineering-and-information-technology.html)
+      from [ETH Zürich](https://ethz.ch/en.html); [B.Sc. in Electronics and Communications Engineering](https://www.polito.it/en/education/bachelor-s-degree-programmes/electronic-and-communications-engineering) from [Politecnico di Torino](https://www.polito.it).
+      
+      
+      During my Master's I completed internships at [Siemens](https://www.siemens.com/en-us/) (video generation for autonomous driving), [BMW Group](https://www.bmwgroup.com/en.html) (6DoF pose estimation for industrial applications), and [IBM Research Zürich](https://research.ibm.com/labs/zurich) (neurosymbolic AI).
+
 
   socialIcons:
     - name: github
