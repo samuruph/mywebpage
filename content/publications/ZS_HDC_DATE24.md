@@ -1,7 +1,7 @@
 ---
 title: "Zero-shot Classification using Hyperdimensional Computing"
 authors: ["Samuele Ruffino", "Geethan Karunaratne", "Michael Hersche", "Luca Benini", "Abu Sebastian", "Abbas Rahimi"]
-venue: "[DATE - Design, Automation and Test in Europe Conference]"
+venue: "DATE"
 date: 2024-10-03T15:38:24+02:00
 thumbnail: "/images/publications/ZS_HDC_DATE24.jpg"   # .jpg / .mp4 / .gif
 abstract: >
